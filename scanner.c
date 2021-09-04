@@ -13,97 +13,101 @@ int main(void)
     {
         switch (currentToken)
         {
-        case NEXTLINE:
-            // printf("retourd à la ligne\n");
-            countLine++;
-            break;
-        case WITHESPACE:
-            break;
-        case MAINFUNCTION:
-            if (mainCreated)
-            {
-                printf("Syntax error in line %d, Main function exist already \n", countLine);
-            }
-            else
-            {
-                mainCreated = 1;
-                nextToken = yylex();
-                if (
-                    nextToken == SEMICOLON ||
-                    isOperator(yytext) ||
-                    nextToken == INTEGER ||
-                    nextToken == OPENBRACKET ||
-                    nextToken == OPENPARENTHESE ||
-                    nextToken == CLOSEBRACKET ||
-                    nextToken == CLOSEPARENTHESE ||
-                    nextToken == MAINFUNCTION)
+            case NEXTLINE:
+                // printf("retourd à la ligne\n");
+                countLine++;
+                break;
+            case WITHESPACE:
+                break;
+            case MAINFUNCTION:
+                if (mainCreated)
                 {
-                    printf("Syntax error in line %d, Expected  identifier \n", countLine + 1);
+                    printf("Syntax error in line %d, Main function exist already \n", countLine);
                 }
-            }
+                else
+                {
+                    mainCreated = 1;
+                    nextToken = yylex();
+                    if (
+                        nextToken == SEMICOLON ||
+                        isOperator(yytext) ||
+                        nextToken == INTEGER ||
+                        nextToken == OPENBRACKET ||
+                        nextToken == OPENPARENTHESE ||
+                        nextToken == CLOSEBRACKET ||
+                        nextToken == CLOSEPARENTHESE ||
+                        nextToken == MAINFUNCTION)
+                    {
+                        printf("Syntax error in line %d, Expected  identifier \n", countLine + 1);
+                    }
+                }
 
-            break;
-        case IF:
-            printf("if `%s` found at line %d\n", yytext, countLine);
-            break;
-        case ELSE:
-            printf("ELSE `%s` found at line %d\n", yytext, countLine);
-            break;
-        case WHILE:
-            printf("WHILE `%s` found at line %d\n", yytext, countLine);
-            break;
-        case DO:
-            printf("DO `%s` found at line %d\n", yytext, countLine);
-            break;
-        case RETURN:
-            printf("RETURN `%s` found at line %d\n", yytext, countLine);
-            break;
-        case OPERATOR:
-            printf("OPERATOR `%s` found at line %d\n", yytext, countLine);
-            break;
-        case PRINT_FUNCTION:
-            nextToken = yylex();
-            if (nextToken != SEMICOLON)
-            {
-                printf("Syntax error in line %d, Expected  `;` \n", countLine);
-            }
-            break;
-        case READ_FUNCTION:
-            nextToken = yylex();
-            if (nextToken != SEMICOLON)
-            {
-                printf("Syntax error in line %d, Expected  `;` \n", countLine);
-            }
-            // printf("READ_FUNCTION `%s` found at line %d\n", yytext, countLine);
-            break;
+                break;
+            case IF:
+                printf("if `%s` found at line %d\n", yytext, countLine);
+                break;
+            case ELSE:
+                printf("ELSE `%s` found at line %d\n", yytext, countLine);
+                break;
+            case WHILE:
+                printf("WHILE `%s` found at line %d\n", yytext, countLine);
+                break;
+            case DO:
+                printf("DO `%s` found at line %d\n", yytext, countLine);
+                break;
+            case RETURN:
+                nextToken = yylex();
+                if (nextToken != IDENTIFIER || nextToken != FUNCTION_CALL)
+                {
+                    printf("Syntax error in line %d , expected an identifier or function call %d\n", countLine, nextToken);
+                }
+                break;
+            case OPERATOR:
+                printf("OPERATOR `%s` found at line %d\n", yytext, countLine);
+                break;
+            case PRINT_FUNCTION:
+                nextToken = yylex();
+                if (nextToken != SEMICOLON)
+                {
+                    printf("Syntax error in line %d, Expected  `;` \n", countLine);
+                }
+                break;
+            case READ_FUNCTION:
+                nextToken = yylex();
+                if (nextToken != SEMICOLON)
+                {
+                    printf("Syntax error in line %d, Expected  `;` \n", countLine);
+                }
+                // printf("READ_FUNCTION `%s` found at line %d\n", yytext, countLine);
+                break;
 
-        case FUNCTION_CALL:
-            nextToken = yylex();
-            if (nextToken != SEMICOLON)
-            {
-                printf("Syntax error in line %d, Expected  `;` \n", countLine);
-            }
-            // printf("FUNCTION_CALL `%s` found at line %d\n", yytext, countLine);
-            break;
-        case FUNCTION_DEFINITION:
-            printf("FUNCTION_DEFINITION found at line %d\n", countLine);
+            case FUNCTION_CALL:
+                nextToken = yylex();
+                if (nextToken != SEMICOLON)
+                {
+                    printf("Syntax error in line %d, Expected  `;` \n", countLine);
+                }
+                // printf("FUNCTION_CALL `%s` found at line %d\n", yytext, countLine);
+                break;
+            case FUNCTION_DEFINITION:
+                printf("FUNCTION_DEFINITION found at line %d\n", countLine);
 
-            break;
-        case OPENPARENTHESE:
-            parentheseCounter++;
-            break;
-        case CLOSEPARENTHESE:
-            parentheseCounter--;
-            break;
-        case OPENBRACKET:
-            bracketCounter++;
-            break;
-        case CLOSEBRACKET:
-            bracketCounter--;
-            break;
-        case CONDITION:
-            printf("CONDITION found at line %d\n", countLine);
-            break;
+                break;
+            case OPENPARENTHESE:
+                parentheseCounter++;
+                break;
+            case CLOSEPARENTHESE:
+                parentheseCounter--;
+                break;
+            case OPENBRACKET:
+                bracketCounter++;
+                break;
+            case CLOSEBRACKET:
+                bracketCounter--;
+                break;
+            case CONDITION:
+                printf("CONDITION found at line %d\n", countLine);
+                break;
             // default:
             //     printf("Syntax error in line %d\n",countLine);
             //     return 1;
