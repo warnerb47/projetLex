@@ -25,9 +25,15 @@ conditions (!?){condition}(\||&)*{condition}
 "/" return DIVIDE;
 "!" return NOT;
 "|" return OR;
-"if" return IF;
+"if("{condition}")" return IF;
+"if("{conditions}")" return IF;
+"if("{identifier}")" return IF;
+"if(!"{identifier}")" return IF;
 "else" 	 return ELSE;
-"while"    return WHILE;
+"while("{condition}")" return WHILE;
+"while("{conditions}")" return WHILE;
+"while("{identifier}")" return WHILE;
+"while(!"{identifier}")" return WHILE;
 "do"    return DO;
 "return"	 return RETURN;
 "int" return TYPE;

@@ -1,3 +1,11 @@
 int main() {
-    !a
+    if(a>b) {
+
+    }
+    while(b){
+
+    }
+    else{
+        
+    }
 }

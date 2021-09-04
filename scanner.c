@@ -44,16 +44,16 @@ int main(void)
 
             break;
         case IF:
-            // printf("if `%s` found at line %d\n", yytext, countLine);
+            printf("if `%s` found at line %d\n", yytext, countLine);
             break;
         case ELSE:
-            // printf("ELSE `%s` found at line %d\n", yytext, countLine);
+            printf("ELSE `%s` found at line %d\n", yytext, countLine);
             break;
         case WHILE:
-            // printf("WHILE `%s` found at line %d\n", yytext, countLine);
+            printf("WHILE `%s` found at line %d\n", yytext, countLine);
             break;
         case DO:
-            // printf("DO `%s` found at line %d\n", yytext, countLine);
+            printf("DO `%s` found at line %d\n", yytext, countLine);
             break;
         case RETURN:
             printf("RETURN `%s` found at line %d\n", yytext, countLine);
@@ -86,7 +86,7 @@ int main(void)
             // printf("FUNCTION_CALL `%s` found at line %d\n", yytext, countLine);
             break;
         case FUNCTION_DEFINITION:
-            // printf("FUNCTION_DEFINITION found at line %d\n", countLine);
+            printf("FUNCTION_DEFINITION found at line %d\n", countLine);
 
             break;
         case OPENPARENTHESE:
