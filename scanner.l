@@ -37,7 +37,9 @@ arguments [{identifier}","]*
 "read()" return READ_FUNCTION;
 "int main()" return MAINFUNCTION;
 {identifier}"()" return FUNCTION_CALL;
-.   printf("Unexpexted character at line %d\n", yylineno);
+"int"{whitespace}{identifier}"()" return FUNCTION_DEFINITION;
+"void"{whitespace}{identifier}"()" return FUNCTION_DEFINITION;
+.   printf("Unexpexted character\n");
 
 %%
 

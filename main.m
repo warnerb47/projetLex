@@ -1,6 +1,2 @@
-int main() {
-    if() {
-    ()
-    {}
-    (
-}
+    int fucntion()
+    void fucntion()

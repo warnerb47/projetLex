@@ -85,6 +85,9 @@ int main(void)
             }
             // printf("FUNCTION_CALL `%s` found at line %d\n", yytext, countLine);
             break;
+        case FUNCTION_DEFINITION:
+            printf("FUNCTION_DEFINITION found at line %d\n", countLine);
+            break;
         case OPENPARENTHESE:
             parentheseCounter++;
             break;
