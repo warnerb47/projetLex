@@ -6,7 +6,7 @@ whitespace [ \t]+
 identifier [a-zA-Z][_a-zA-Z0-9]*
 arguments [{identifier}","]*
 %%
-\n  return NEXTLINE;
+"\n"  return NEXTLINE;
 {whitespace} return WITHESPACE;
 ";" return SEMICOLON;
 "=" return OPERATOR;
@@ -31,8 +31,8 @@ arguments [{identifier}","]*
 [1-9][0-9]* return INTEGER;
 "{"      return OPENBRACKET;
 "}"      return CLOSEBRACKET;
-"("      return OPENPATENTHESE;
-")"      return CLOSEPATENTHESE;
+"("      return OPENPARENTHESE;
+")"      return CLOSEPARENTHESE;
 "print("{identifier}")" return PRINT_FUNCTION;
 "read()" return READ_FUNCTION;
 "int main()" return MAINFUNCTION;
