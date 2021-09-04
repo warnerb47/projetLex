@@ -10,7 +10,6 @@
         currentToken = yylex();
         while (currentToken)
         {
-            // printf("currentToken = %d \n", currentToken);
             switch (currentToken) {
                 case WITHESPACE:
                     break;
@@ -28,15 +27,15 @@
                         printf("Syntax error in line %d, Expected  identifier \n", yylineno);
                         return 1;
                     }
-                    // printf("main function `%s` found at line %d\n", yytext, yylineno);
+                    // printf("main function  found at line %d\n", yylineno);
                     break;
-                case TYPE:
-                    if(nextToken != IDENTIFIER) {
-                        printf("Syntax error in line %d, Expected an identifier but found %s\n", yylineno+1, yytext);
-                        return 1;
-                    }
-                    printf("TYPE `%s` found at line %d\n", yytext, yylineno);
-                    break;
+                // case TYPE:
+                //     if(nextToken != IDENTIFIER) {
+                //         printf("Syntax error in line %d, Expected an identifier but found %s\n", yylineno+1, yytext);
+                //         return 1;
+                //     }
+                //     printf("TYPE `%s` found at line %d\n", yytext, yylineno);
+                //     break;
                 case IF:
                     printf("if `%s` found at line %d\n", yytext, yylineno);
                     break;
@@ -56,14 +55,32 @@
                     printf("OPERATOR `%s` found at line %d\n", yytext, yylineno);
                     break;
                 case PRINT_FUNCTION:
-                    printf("PRINT_FUNCTION `%s` found at line %d\n", yytext, yylineno);
+                    nextToken = yylex();
+                    if (nextToken != SEMICOLON)
+                    {
+                        printf("Syntax error in line %d, Expected  `;` \n", yylineno-1);
+                        return 1;
+                    }
+                    // printf("PRINT_FUNCTION `%s` found at line %d\n", yytext, yylineno);
                     break;
                 case READ_FUNCTION:
-                    printf("READ_FUNCTION `%s` found at line %d\n", yytext, yylineno);
+                    nextToken = yylex();
+                    if (nextToken != SEMICOLON)
+                    {
+                        printf("Syntax error in line %d, Expected  `;` \n", yylineno-1);
+                        return 1;
+                    }
+                    // printf("READ_FUNCTION `%s` found at line %d\n", yytext, yylineno);
                     break;
                 
                 case FUNCTION_CALL:
-                    printf("FUNCTION_CALL `%s` found at line %d\n", yytext, yylineno);
+                    nextToken = yylex();
+                    if (nextToken != SEMICOLON)
+                    {
+                        printf("Syntax error in line %d, Expected  `;` \n", yylineno-1);
+                        return 1;
+                    }
+                    // printf("FUNCTION_CALL `%s` found at line %d\n", yytext, yylineno);
                     break;
                 // default:
                 //     printf("Syntax error in line %d\n",yylineno);

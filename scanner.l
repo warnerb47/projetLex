@@ -4,7 +4,6 @@
 
 whitespace [ \t\n]+
 identifier [a-zA-Z][_a-zA-Z0-9]*
-manFunction "int"{whitespace}"main()"{whitespace}*"{"
 arguments [{identifier}","]*
 %%
 \n { yylineno++; }
@@ -36,12 +35,13 @@ arguments [{identifier}","]*
 ")"      return CLOSEPATENTHESE;
 "print("{identifier}")" return PRINT_FUNCTION;
 "read()" return READ_FUNCTION;
+"int main()" return MAINFUNCTION;
 {identifier}"()" return FUNCTION_CALL;
 .   printf("Unexpexted character\n");
 
 %%
 
 int yywrap(){
-	printf("\t Fin de fichier detecte !\n");
+	printf("\t Filed Scanned\n");
 	return -1;
 }
