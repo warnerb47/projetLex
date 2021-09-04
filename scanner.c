@@ -3,7 +3,7 @@
 
 extern int yylex();
 extern char *yytext;
-
+int isOperator(char *string);
 int main(void)
 {
     int currentToken, nextToken, countLine = 1, mainCreated = 0;
@@ -30,7 +30,7 @@ int main(void)
                 nextToken = yylex();
                 if (
                     nextToken == SEMICOLON ||
-                    nextToken == OPERATOR ||
+                    isOperator(yytext) ||
                     nextToken == INTEGER ||
                     nextToken == OPENBRACKET ||
                     nextToken == OPENPARENTHESE ||
@@ -44,16 +44,16 @@ int main(void)
 
             break;
         case IF:
-            printf("if `%s` found at line %d\n", yytext, countLine);
+            // printf("if `%s` found at line %d\n", yytext, countLine);
             break;
         case ELSE:
-            printf("ELSE `%s` found at line %d\n", yytext, countLine);
+            // printf("ELSE `%s` found at line %d\n", yytext, countLine);
             break;
         case WHILE:
-            printf("WHILE `%s` found at line %d\n", yytext, countLine);
+            // printf("WHILE `%s` found at line %d\n", yytext, countLine);
             break;
         case DO:
-            printf("DO `%s` found at line %d\n", yytext, countLine);
+            // printf("DO `%s` found at line %d\n", yytext, countLine);
             break;
         case RETURN:
             printf("RETURN `%s` found at line %d\n", yytext, countLine);
@@ -86,7 +86,8 @@ int main(void)
             // printf("FUNCTION_CALL `%s` found at line %d\n", yytext, countLine);
             break;
         case FUNCTION_DEFINITION:
-            printf("FUNCTION_DEFINITION found at line %d\n", countLine);
+            // printf("FUNCTION_DEFINITION found at line %d\n", countLine);
+
             break;
         case OPENPARENTHESE:
             parentheseCounter++;
@@ -99,6 +100,9 @@ int main(void)
             break;
         case CLOSEBRACKET:
             bracketCounter--;
+            break;
+        case CONDITION:
+            printf("CONDITION found at line %d\n", countLine);
             break;
             // default:
             //     printf("Syntax error in line %d\n",countLine);
@@ -114,6 +118,24 @@ int main(void)
     {
         printf("Unexpected end of file please close opened brackets\n");
     }
-
     return 0;
+}
+
+int isOperator(char *string)
+{
+    return string == "=" |
+           string == "==" |
+           string == "+" |
+           string == "-" |
+           string == "*" |
+           string == "<" |
+           string == ">" |
+           string == "<=" |
+           string == ">=" |
+           string == "&" |
+           string == "/" |
+           string == "!" |
+           string == "<>" |
+           string == "|" |
+           string == "/";
 }

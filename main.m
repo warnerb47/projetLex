@@ -1,2 +1,3 @@
-    int fucntion()
-    void fucntion()
+int main() {
+    !a
+}

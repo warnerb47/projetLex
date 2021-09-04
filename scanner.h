@@ -11,7 +11,6 @@
 #define RETURN 9
 #define MAINFUNCTION 10
 
-
 #define SEPERATOR 11
 #define SEMICOLON 12
 #define WITHESPACE 13
@@ -27,3 +26,18 @@
 #define TYPE 22
 
 #define NEXTLINE 23
+
+#define EQUAL 24
+#define PLUS 25
+#define MINUS 26
+#define TIMES 27
+#define AFFECT 28
+#define INFERIOR 29
+#define INFERIOR_EQUAL 30
+#define SUPERIOR 31
+#define SUPERIOR_EQUAL 32
+#define AND 33
+#define DIVIDE 34
+#define NOT 35
+#define OR 36
+#define CONDITION 37

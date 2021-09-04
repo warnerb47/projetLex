@@ -4,24 +4,28 @@
 
 whitespace [ \t]+
 identifier [a-zA-Z][_a-zA-Z0-9]*
-arguments [{identifier}","]*
+arguments [{identifier}{whitespace}*,]*{whitespace}*{identifier}{whitespace}*
+condition (!?)({identifier}(<|>|==|<=|>=|!=|\||&){identifier})
+shortCondition (!?){identifier}
+conditions (!?){condition}(\||&)*{condition}
 %%
 "\n"  return NEXTLINE;
 {whitespace} return WITHESPACE;
 ";" return SEMICOLON;
-"=" return OPERATOR;
-"+" return OPERATOR;
-"-" return OPERATOR;
-"*" return OPERATOR;
-"<" return OPERATOR;
-"<=" return OPERATOR;
-">" return OPERATOR;
-">=" return OPERATOR;
-"==" return OPERATOR;
-"&" return OPERATOR;
-"/" return OPERATOR;
-"!" return OPERATOR;
-"if"       return IF;
+"=" return AFFECT;
+"+" return PLUS;
+"-" return MINUS;
+"*" return TIMES;
+"<" return INFERIOR;
+"<=" return INFERIOR_EQUAL;
+">" return SUPERIOR;
+">=" return SUPERIOR_EQUAL;
+"==" return EQUAL;
+"&" return AND;
+"/" return DIVIDE;
+"!" return NOT;
+"|" return OR;
+"if" return IF;
 "else" 	 return ELSE;
 "while"    return WHILE;
 "do"    return DO;
@@ -36,9 +40,11 @@ arguments [{identifier}","]*
 "print("{identifier}")" return PRINT_FUNCTION;
 "read()" return READ_FUNCTION;
 "int main()" return MAINFUNCTION;
-{identifier}"()" return FUNCTION_CALL;
-"int"{whitespace}{identifier}"()" return FUNCTION_DEFINITION;
-"void"{whitespace}{identifier}"()" return FUNCTION_DEFINITION;
+{conditions} return CONDITION;
+{shortCondition} return CONDITION;
+{identifier}"("{arguments}*")" return FUNCTION_CALL;
+"int"{whitespace}{identifier}"("{arguments}*")" return FUNCTION_DEFINITION;
+"void"{whitespace}{identifier}"("{arguments}*")" return FUNCTION_DEFINITION;
 .   printf("Unexpexted character\n");
 
 %%
