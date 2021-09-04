@@ -25,3 +25,5 @@
 #define PRINT_FUNCTION 20
 #define READ_FUNCTION 21
 #define TYPE 22
+
+#define NEXTLINE 23

@@ -11,6 +11,9 @@
         while (currentToken)
         {
             switch (currentToken) {
+                case NEXTLINE:
+                    // printf("retourd à la ligne\n");
+                    yylineno++;
                 case WITHESPACE:
                     break;
                 case MAINFUNCTION:
@@ -21,11 +24,12 @@
                         nextToken == INTEGER ||
                         nextToken == OPENBRACKET ||
                         nextToken == OPENPATENTHESE ||
+                        nextToken == CLOSEBRACKET ||
+                        nextToken == CLOSEPATENTHESE ||
                         nextToken == MAINFUNCTION
                     )
                     {
-                        printf("Syntax error in line %d, Expected  identifier \n", yylineno);
-                        return 1;
+                        printf("Syntax error in line %d, Expected  identifier \n", yylineno+1);
                     }
                     // printf("main function  found at line %d\n", yylineno);
                     break;
@@ -58,8 +62,7 @@
                     nextToken = yylex();
                     if (nextToken != SEMICOLON)
                     {
-                        printf("Syntax error in line %d, Expected  `;` \n", yylineno-1);
-                        return 1;
+                        printf("Syntax error in line %d, Expected  `;` \n", yylineno);
                     }
                     // printf("PRINT_FUNCTION `%s` found at line %d\n", yytext, yylineno);
                     break;
@@ -67,8 +70,7 @@
                     nextToken = yylex();
                     if (nextToken != SEMICOLON)
                     {
-                        printf("Syntax error in line %d, Expected  `;` \n", yylineno-1);
-                        return 1;
+                        printf("Syntax error in line %d, Expected  `;` \n", yylineno);
                     }
                     // printf("READ_FUNCTION `%s` found at line %d\n", yytext, yylineno);
                     break;
@@ -77,8 +79,7 @@
                     nextToken = yylex();
                     if (nextToken != SEMICOLON)
                     {
-                        printf("Syntax error in line %d, Expected  `;` \n", yylineno-1);
-                        return 1;
+                        printf("Syntax error in line %d, Expected  `;` \n", yylineno);
                     }
                     // printf("FUNCTION_CALL `%s` found at line %d\n", yytext, yylineno);
                     break;

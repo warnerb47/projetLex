@@ -2,11 +2,11 @@
 #include "scanner.h"
 %}
 
-whitespace [ \t\n]+
+whitespace [ \t]+
 identifier [a-zA-Z][_a-zA-Z0-9]*
 arguments [{identifier}","]*
 %%
-\n { yylineno++; }
+\n  return NEXTLINE;
 {whitespace} return WITHESPACE;
 ";" return SEMICOLON;
 "=" return OPERATOR;
@@ -37,11 +37,11 @@ arguments [{identifier}","]*
 "read()" return READ_FUNCTION;
 "int main()" return MAINFUNCTION;
 {identifier}"()" return FUNCTION_CALL;
-.   printf("Unexpexted character\n");
+.   printf("Unexpexted character at line %d\n", yylineno);
 
 %%
 
 int yywrap(){
-	printf("\t Filed Scanned\n");
+	printf("\t File Scanned\n");
 	return -1;
 }
