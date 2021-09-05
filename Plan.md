@@ -5,5 +5,6 @@
 # handle if statemen syntax error ✅
 # handle while statement syntax error ✅
 # handle return statement syntax error ✅
+# handle table declaration✅
 # handle function definition in another function error
 # display symbol tables on success scan

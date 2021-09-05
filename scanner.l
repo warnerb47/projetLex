@@ -14,6 +14,7 @@ shortCondition (!?){identifier}
 conditions (!?){condition}(\||&)*{condition}
 functionCall {identifier}"("{arguments}*")"
 
+
 return "return"{whitespace}({identifier}|{functionCall}|{conditions}|{condition}|{artihmeticExpression}|{integer}){whitespace}
 inValidReturn "return"{whitespace}[^({identifier}|{functionCall}|{conditions}|{condition}|{artihmeticExpression}|{integer})]{whitespace}
 
@@ -61,6 +62,8 @@ invalidWhileStatement "while"{whitespace}"("{whitespace}[^({identifier}|{functio
 {conditions} return CONDITION;
 {shortCondition} return CONDITION;
 {functionCall} return FUNCTION_CALL;
+"int"{whitespace}{identifier}{whitespace} return INTEGER_DECLARATION;
+"int"{whitespace}{identifier}{whitespace}"["{whitespace}{integer}?{whitespace}"]"{whitespace} return TABLE_DECLARATION;
 "int"{whitespace}{identifier}"("{arguments}*")" return FUNCTION_DEFINITION;
 "void"{whitespace}{identifier}"("{arguments}*")" return FUNCTION_DEFINITION;
 .   printf("Unexpexted character\n");

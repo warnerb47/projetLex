@@ -95,6 +95,20 @@ int main(void)
         case FUNCTION_DEFINITION:
             printf("FUNCTION_DEFINITION found at line %d\n", countLine);
             break;
+        case INTEGER_DECLARATION:
+            nextToken = yylex();
+            if (nextToken != SEMICOLON)
+            {
+                printf("Syntax error in line %d, Expected  `;` but found %s \n", countLine, yytext);
+            }
+            break;
+        case TABLE_DECLARATION:
+            nextToken = yylex();
+            if (nextToken != SEMICOLON)
+            {
+                printf("Syntax error in line %d, Expected  `;` but found %s \n", countLine, yytext);
+            }
+            break;
         case OPENPARENTHESE:
             parentheseCounter++;
             break;
