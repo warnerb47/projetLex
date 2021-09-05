@@ -17,6 +17,12 @@ int main(void)
             // printf("retourd à la ligne\n");
             countLine++;
             break;
+        case INTEGER_TYPE:
+            printf("type simple de valeur %s à la ligne %d\n", yytext, countLine);
+            break;
+        case IDENTIFIER:
+            printf("identificateur de valeur %s à la ligne %d\n", yytext, countLine);
+            break;
         case WITHESPACE:
             break;
         case MAINFUNCTION:
@@ -31,7 +37,7 @@ int main(void)
                 if (
                     nextToken == SEMICOLON ||
                     isOperator(yytext) ||
-                    nextToken == INTEGER ||
+                    nextToken == INTEGER_TYPE ||
                     nextToken == OPENBRACKET ||
                     nextToken == OPENPARENTHESE ||
                     nextToken == CLOSEBRACKET ||
@@ -102,6 +108,9 @@ int main(void)
                 printf("Syntax error in line %d, Expected  `;` but found %s \n", countLine, yytext);
             }
             break;
+        case INVALID_INTEGER_DECLARATION:
+            printf("Syntax error in line %d, invalid declaration \n", countLine);
+            break;
         case TABLE_DECLARATION:
             nextToken = yylex();
             if (nextToken != SEMICOLON)
@@ -109,16 +118,23 @@ int main(void)
                 printf("Syntax error in line %d, Expected  `;` but found %s \n", countLine, yytext);
             }
             break;
+        case INVALID_TABLE_DECLARATION:
+            printf("Syntax error in line %d, invalid declaration \n", countLine);
+            break;
         case OPENPARENTHESE:
+            printf("symbole de valeur %s à la ligne %d\n", yytext, countLine);
             parentheseCounter++;
             break;
         case CLOSEPARENTHESE:
+            printf("symbole de valeur %s à la ligne %d\n", yytext, countLine);
             parentheseCounter--;
             break;
         case OPENBRACKET:
+            printf("symbole de valeur %s à la ligne %d\n", yytext, countLine);
             bracketCounter++;
             break;
         case CLOSEBRACKET:
+            printf("symbole de valeur %s à la ligne %d\n", yytext, countLine);
             bracketCounter--;
             break;
         case CONDITION:
