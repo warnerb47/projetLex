@@ -41,3 +41,6 @@
 #define NOT 35
 #define OR 36
 #define CONDITION 37
+#define INVALID_RETURN 38
+#define INVALID_IF 39
+#define INVALID_WHILE 40

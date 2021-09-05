@@ -1,6 +1,6 @@
 int main() {
     if(a>b) {
-        return a;
+        return a ;
     }
     while(b){
 
