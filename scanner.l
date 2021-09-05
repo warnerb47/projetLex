@@ -7,26 +7,14 @@ nexline [ \n]+
 whitespace {tabulation}*{nexline}*
 identifier [a-zA-Z][_a-zA-Z0-9]*
 integer [1-9][0-9]*
-arguments [{identifier}{whitespace},]*{whitespace}{identifier}{whitespace}
-condition (!?)({identifier}(<|>|==|<=|>=|!=|\||&){identifier})
-artihmeticExpression {identifier}(\+|\*|\/|-|=){identifier}
-shortCondition (!?){identifier}
-conditions (!?){condition}(\||&)*{condition}
-functionCall {identifier}"("{arguments}*")"
 
-
-return "return"{whitespace}({identifier}|{functionCall}|{conditions}|{condition}|{artihmeticExpression}|{integer}){whitespace}
-inValidReturn "return"{whitespace}[^({identifier}|{functionCall}|{conditions}|{condition}|{artihmeticExpression}|{integer})]{whitespace}
-
-validIfStatement "if"{whitespace}"("{whitespace}({identifier}|{functionCall}|{conditions}|{condition}|{integer}){whitespace}")"{whitespace}
-invalidIfStatement "if"{whitespace}"("{whitespace}[^({identifier}|{functionCall}|{conditions}|{condition}|{integer})]{whitespace}")"{whitespace}
-
-validWhileStatement "while"{whitespace}"("{whitespace}({identifier}|{functionCall}|{conditions}|{condition}|{integer}){whitespace}")"{whitespace}
-invalidWhileStatement "while"{whitespace}"("{whitespace}[^({identifier}|{functionCall}|{conditions}|{condition}|{integer})]{whitespace}")"{whitespace}
 %%
+
 
 {nexline}  return NEXTLINE;
 {whitespace} return WITHESPACE;
+
+
 ";" return SEMICOLON;
 "=" return AFFECT;
 "+" return PLUS;
@@ -41,33 +29,27 @@ invalidWhileStatement "while"{whitespace}"("{whitespace}[^({identifier}|{functio
 "/" return DIVIDE;
 "!" return NOT;
 "|" return OR;
-{validIfStatement} return IF;
-{invalidIfStatement} return INVALID_IF;
-{validWhileStatement} return WHILE;
-{invalidWhileStatement} return INVALID_WHILE;
-"else" 	 return ELSE;
-"do"    return DO;
-{return}	 return RETURN;
-{inValidReturn}	 return INVALID_RETURN;
-"int" return INTEGER_TYPE;
-{identifier} return IDENTIFIER;
-{integer} return INTEGER_TYPE;
 "{"      return OPENBRACKET;
 "}"      return CLOSEBRACKET;
 "("      return OPENPARENTHESE;
 ")"      return CLOSEPARENTHESE;
-"print("{identifier}")" return PRINT_FUNCTION;
-"read()" return READ_FUNCTION;
-"int"{whitespace}"main("{whitespace}")"{whitespace} return MAINFUNCTION;
-{conditions} return CONDITION;
-{shortCondition} return CONDITION;
-{functionCall} return FUNCTION_CALL;
-"int"{whitespace}{identifier}{whitespace} return INTEGER_DECLARATION;
-"int"{whitespace}[^{identifier}]{whitespace} return INVALID_INTEGER_DECLARATION;
-"int"{whitespace}[^{identifier}]{whitespace}"["{whitespace}[^{integer}]{whitespace}"]"{whitespace} return INVALID_TABLE_DECLARATION;
-"int"{whitespace}{identifier}{whitespace}"["{whitespace}{integer}?{whitespace}"]"{whitespace} return TABLE_DECLARATION;
-"int"{whitespace}{identifier}"("{arguments}*")" return FUNCTION_DEFINITION;
-"void"{whitespace}{identifier}"("{arguments}*")" return FUNCTION_DEFINITION;
+
+"if" return IF;
+"while" return WHILE;
+"else" 	 return ELSE;
+"do"    return DO;
+"return"	 return RETURN;
+"int" return INTEGER_TYPE;
+"ecrire" return PRINT_FUNCTION;
+"lire" return READ_FUNCTION;
+
+
+{identifier} return IDENTIFIER;
+
+
+{integer} return INTEGER;
+
+
 .   printf("Unexpexted character\n");
 
 %%
